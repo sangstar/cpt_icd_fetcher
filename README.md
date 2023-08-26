@@ -8,6 +8,7 @@ Currently there is no support for linking these ICD codes to CPT codes, but that
 Initialize the `ICD_Fetcher` and add your ClientId and ClientSecret you got from the ICD API:
 
 ```
+>>> from icd_fetcher import *
 >>> ICD = ICD_Fetcher(ClientId, ClientSecret)
 ```
 
