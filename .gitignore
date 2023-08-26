@@ -1,0 +1,5 @@
+medessary_venv
+.ipynb_checkpoints
+__pycache__
+*.ipynb
+keys.py
