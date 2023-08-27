@@ -1,5 +1,5 @@
 # CPT & ICD Fetcher
-This is a little tool that uses BERT keyword extraction and cosine-similarity on context vectors as well as the ICD API to suggest 4 ICD-11 codes that can be used when filling out prior authorizations / orders for procedures. Choosing appropriate ICD codes when filling this out is important for insurance agencies to deem medical necessity and provide coverage. 
+This is a little tool that uses BERT keyword extraction and cosine-similarity on context vectors as well as the ICD API to suggest CPT and ICD-11 codes that can be used when filling out prior authorizations / orders for procedures. Choosing the appropriate codes when filling this out is important for insurance agencies to deem medical necessity and provide coverage. 
 
 
 ## Quickstart
