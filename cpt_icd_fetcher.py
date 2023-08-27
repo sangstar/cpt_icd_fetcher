@@ -1,6 +1,5 @@
 import requests
 import json
-from keys import *
 import torch
 import torch.nn.functional as F
 from transformers import BertForTokenClassification, BertTokenizer, BertModel
