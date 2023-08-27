@@ -1,7 +1,9 @@
 # ICD Fetcher
 This is a little tool that uses BERT keyword extraction and cosine-similarity on context vectors as well as the ICD API to suggest 4 ICD-11 codes that can be used when filling out prior authorizations / orders for procedures. Choosing appropriate ICD codes when filling this out is important for insurance agencies to deem medical necessity and provide coverage. 
 
-Currently there is no support for linking these ICD codes to CPT codes, but that is currently a work of progress for me.
+To add:
+- Support for ICD-10
+- Support for CPT codes
 
 ## Quickstart
 

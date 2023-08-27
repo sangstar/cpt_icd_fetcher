@@ -130,13 +130,11 @@ def get_top_icd_matches(query, token):
     return df
 
 biobert_model_name = "alvaroalon2/biobert_diseases_ner"
-bert_model_name = "bert-base-uncased"
+bert_model_name = "dmis-lab/biobert-v1.1"
 
-class ICD_Fetcher:
-    def __init__(self,
-                ClientId,
-                ClientSecret):
-        self.token = generate_token(ClientId, ClientSecret)
+class CPT_ICD_Fetcher:
+    def __init__(self):
+        self.token = generate_token()
 
         print(f'Downloading model {biobert_model_name}')
         self.biobert = BertForTokenClassification.from_pretrained(biobert_model_name)
@@ -146,7 +144,14 @@ class ICD_Fetcher:
         self.bert = BertModel.from_pretrained(bert_model_name)
         self.bert_tokenizer = BertTokenizer.from_pretrained(bert_model_name)
 
-
+        cpt_df = pd.read_csv('biobert_cpt_with_encodings.csv')
+        cpt_df = cpt_df.drop_duplicates(subset = ['label'])
+        cpt_df['encoding'] = cpt_df['encoding'].apply(eval)
+        cpt_df['encoding'] = cpt_df['encoding'].apply(torch.FloatTensor)
+        cpt_df = cpt_df[cpt_df.columns[1:]]
+        cpt_df.columns = ['CPT','label','encoding']
+        self.cpt = cpt_df
+        
 
 
     def get_icd11_from_query(self, text):
@@ -164,3 +169,10 @@ class ICD_Fetcher:
         to_dict = df.to_dict(orient = 'records')
         return to_dict
 
+    def get_cpt_codes(self, text, n_retrieve = 4):
+        vec1 = seq_to_context_vec(text, self.bert, self.bert_tokenizer)
+        df = self.cpt
+        df['cos_sim'] = df['encoding'].apply(lambda x: F.cosine_similarity(vec1, x).item())
+        df = df.sort_values(by = 'cos_sim', ascending = False)[['CPT','label','cos_sim']].head(n_retrieve)
+        df = df.to_dict(orient = 'records')
+        return df 
