@@ -7,6 +7,11 @@ from transformers import BertForTokenClassification, BertTokenizer, BertModel
 import pandas as pd
 from bs4 import BeautifulSoup
 
+
+biobert_model_name = "alvaroalon2/biobert_diseases_ner"
+bert_model_name = "dmis-lab/biobert-v1.1"
+
+
 def get_key_labels(text, model, tokenizer):
     inputs = tokenizer(text, return_tensors="pt")
     with torch.no_grad():
@@ -128,9 +133,6 @@ def get_top_icd_matches(query, token):
     except:
         df = pd.DataFrame()
     return df
-
-biobert_model_name = "alvaroalon2/biobert_diseases_ner"
-bert_model_name = "dmis-lab/biobert-v1.1"
 
 class CPT_ICD_Fetcher:
     def __init__(self):
