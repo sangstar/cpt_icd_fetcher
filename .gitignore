@@ -3,4 +3,4 @@ medessary_venv
 __pycache__
 *.ipynb
 keys.py
-*.csv
+

@@ -1,23 +1,20 @@
-# ICD Fetcher
+# CPT & ICD Fetcher
 This is a little tool that uses BERT keyword extraction and cosine-similarity on context vectors as well as the ICD API to suggest 4 ICD-11 codes that can be used when filling out prior authorizations / orders for procedures. Choosing appropriate ICD codes when filling this out is important for insurance agencies to deem medical necessity and provide coverage. 
 
-To add:
-- Support for ICD-10
-- Support for CPT codes
 
 ## Quickstart
 
-Initialize the `ICD_Fetcher` and add your ClientId and ClientSecret you got from the ICD API:
+Initialize the `CPT_ICD_Fetcher` and add your ClientId and ClientSecret you got from the ICD API:
 
 ```
->>> from icd_fetcher import *
->>> ICD = ICD_Fetcher(ClientId, ClientSecret)
+>>> from cpt_icd_fetcher import *
+>>> fetcher = CPT_ICD_Fetcher(ClientId, ClientSecret)
 ```
 
 Describe a diagnostic profile and ICD codes will be suggested.
 
 ```
->>> ICD.get_icd11_from_query('stroke and mitral valve regurgitation')
+>>> fetcher.get_icd11_from_query('stroke and mitral valve regurgitation')
 
 [{'title': 'Stroke not known if ischaemic or haemorrhagic',
   'theCode': '8B20',

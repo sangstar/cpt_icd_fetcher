@@ -135,8 +135,10 @@ def get_top_icd_matches(query, token):
     return df
 
 class CPT_ICD_Fetcher:
-    def __init__(self):
-        self.token = generate_token()
+    def __init__(self,
+                ClientId,
+                ClientSecret):
+        self.token = generate_token(ClientId, ClientSecret)
 
         print(f'Downloading model {biobert_model_name}')
         self.biobert = BertForTokenClassification.from_pretrained(biobert_model_name)
